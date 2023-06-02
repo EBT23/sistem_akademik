@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StudentController;
@@ -43,9 +44,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(ScheduleController::class)->group( function (){
         Route::get('/schedule','schedule')->name('schedule');
+        Route::post('/schedule/add','add_schedule')->name('add.schedule');
+        Route::post('/schedule/update/{id}','update_schedule')->name('update.schedule');
+        Route::delete('/schedule/delete/{id}','delete_schedule')->name('delete.schedule');
+    });
+
+    Route::controller(MateriController::class)->group( function (){
+        Route::get('/materi','materi')->name('materi');
+        Route::post('/materi/add','add_materi')->name('add.materi');
+        Route::post('/materi/update/{id}','update_materi')->name('update.materi');
+        Route::delete('/materi/delete/{id}','delete_materi')->name('delete.materi');
     });
 
     Route::controller(ProfileController::class)->group( function(){
         Route::get('/profile', 'profile')->name('profile');
+        Route::post('/profile-update', 'updateProfile')->name('update.profile');
     });
 });

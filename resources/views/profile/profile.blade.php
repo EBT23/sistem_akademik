@@ -7,7 +7,7 @@
     <div class="card-header pb-0">
       <div class="d-flex align-items-center">
         <p class="mb-0">Edit Profile</p>
-        <button class="btn btn-primary btn-sm ms-auto">Settings</button>
+        <a href="javascript:;"  class="btn bg-gradient-info btn-sm ms-auto">Settings</a>
       </div>
     </div>
     <div class="card-body">

@@ -9,53 +9,72 @@
   <div class="row">
 <div class="col-md-12">
     <div class="card mb-4">
-      <div class="card-header pb-0">
-        <h6 class="text-center">Jadwal</h6>
+      <div class="card-header pb-0 d-flex">
+        <h6 class="text-left col-md-8">Jadwal</h6>
+        <div class="col-lg-1 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+          <div class="nav-wrapper position-relative end-0">
+            <ul class="nav nav-pills nav-fill p-1" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="modal" data-bs-target="#addModal" href="javascript:;"  aria-selected="true">
+                  <i class="ni ni-fat-add"></i>
+                  <span class="ms-2">Add</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
           <table id="dataTable" class="table align-items-center mb-0">
             <thead>
               <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Materi</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jam</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hari</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Hari</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
                 <th class="text text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {{-- @foreach ($teacher as $item) --}}
+              @forelse ($schedule as $no => $item)
               <tr>
                 <td>
+                  <span class="text-xs font-weight-bold mb-0">{{ $no+1 }}</span>
+                </td>
+                <td>
                   <div class="d-flex px-2 py-1">
-                    <div>
+                    {{-- <div>
                       <img src="https://api.dicebear.com/5.x/pixel-art/svg?seed=7216" class="avatar avatar-sm me-3" alt="user1">
-                    </div>
+                    </div> --}}
                     <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Pengenalan</h6>
+                      <h6 class="mb-0 text-sm">{{ $item->nama_materi }}</h6>
                       <p class="text-xs text-secondary mb-0">bahasa korea</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <p class="text-xs font-weight-bold mb-0">Jam</p>
-                  <p class="text-xs text-secondary mb-0">08.00 s/d 15.00</p>
+                  <h6 class="text-xs font-weight-bold mb-0">Jam</h6>
+                  <p class="text-xs text-secondary mb-0">{{ date_format(date_create($item->dari), 'H:i') }} s/d {{ date_format(date_create($item->sampai), 'H:i') }}</p>
+                </td>
+                <td>
+                  <h6 class="text-xs font-weight-bold mb-0">{{ date_format(date_create($item->hari), 'l') }}</h6>
+                  <p class="text-xs text-secondary mb-0">{{ date_format(date_create($item->hari), 'd-M-Y') }}</p>
                 </td>
                 <td class="align-middle text-center text-sm">
-                    <span class="text-secondary text-xs font-weight-bold">Senin</span>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="badge badge-sm bg-gradient-success">Online</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                  @if ($item->is_active == 1 )
+                     <span class="badge badge-sm bg-gradient-success">Aktif</span>
+                  
+                  @else
+                    <span class="badge badge-sm bg-gradient-danger">Tidak Aktif</span>
+                  
+                  @endif
                 </td>
                 <td class="d-flex">
-                  <a class="btn  btn-sm bg-gradient-warning text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-notification"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                  <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-notification{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                   <div class="col-md-1">
-                    <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                    <div class="modal fade" id="modal-notification{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                       <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                         <div class="modal-content">
                           <div class="modal-header bg-gradient-info">
@@ -64,29 +83,89 @@
                               <span aria-hidden="true">×</span>
                             </button>
                           </div>
-                          <form action="teacher-delete" method="POST">
+                          <form action="schedule/delete/{{ $item->id }}" method="POST">
                             @method('DELETE')
                             @csrf
                           <div class="modal-body">
                             <div class="py-3 text-center">
                               <i class="ni ni-bell-55 ni-3x text-warning"></i><br>
-                              <h7 class="text-gradient text-danger">Apakah yakin kamu ingin menghapus Akun <b></b> !</h7>
-                              {{-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> --}}
+                              <h7 class="text-gradient text-danger">Apakah kamu yakin, ingin menghapus data ini <b>?</b></h7>
                             </div>
                           </div>
                           <div class="modal-footer">
                             <button type="submit" class="btn bg-gradient-success">Ya, Hapus</button>
-                            <button type="button" class="btn bg-gradient-warning text-white ml-auto" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn bg-gradient-secondary text-white ml-auto" data-bs-dismiss="modal">Batal</button>
                           </div>
                           </form>
                         </div>
                       </div>
                     </div>
                   </div>
-                <a class="btn btn-sm bg-gradient-info text-white px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit</a>
+                <a class="btn btn-sm bg-gradient-info text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}" data-original-title="Edit user"><i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit</a>
+                <!-- Modal -->
+                <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header bg-gradient-info">
+                      <h5 class="modal-title text-white" id="editModalLabel">Edit Materi</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      <form action="{{  route('update.schedule', $item->id)  }}" method="POST">
+                          @csrf
+                          <div class="form-group col-lg">
+                            <label for="materi_id">Nama Materi</label>
+                            <select name="materi_id" id="materi_id" class="form-control">
+                              <option selected>-Pilih Materi-</option>
+                              @foreach($materi as $pj)
+                             <option @if($item->materi_id == $pj->id) selected @endif value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
+                             @endforeach
+                            </select>
+                          </div>
+                          <div class="row">
+                          <div class="col-6">
+                            <div class="form-group">
+                              <label for="dari">Dari Jam</label>
+                              <input type="time" class="form-control" id="dari" name="dari" value="{{ $item->dari }}" placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="sampai">Sampai Jam</label>
+                              <input type="time" class="form-control" id="sampai" name="sampai" value="{{ $item->sampai }}" placeholder="">
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="form-group">
+                              <label for="hari">Hari/Tanggal</label>
+                              <input type="date" class="form-control" id="hari" name="hari" value="{{ $item->hari }}" placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="is_active">Status</label>
+                              <select name="is_active" id="is_active" class="form-control">
+                                  <option value="1" {{ $item->is_active == 1 ? 'selected' : '' }}>Aktif</option>
+                                  <option value="0" {{ $item->is_active == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                              </select>
+                            </div>
+                          </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn bg-gradient-info">Simpan</button>
+                            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
+                          </div>
+                         </form>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              </td>
+              </tr>
+              @empty
+              <tr>
+                <td>
+
+                  <p class="text-center">Data masih kosong.</p>
                 </td>
               </tr>
-              {{-- @endforeach --}}
+              @endforelse
             </tbody>
           </table>
         </div>
@@ -95,4 +174,60 @@
   </div>
 </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-gradient-info">
+        <h5 class="modal-title text-white" id="addModalLabel">Tambah Jadwal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form action="{{ route('add.schedule') }}" method="POST">
+        @csrf
+        <div class="form-group col-lg">
+          <label for="full_name">Nama Materi</label>
+          <select name="materi_id" id="materi_id" class="form-control">
+            <option selected>-Pilih Materi-</option>
+            @foreach($materi as $pj)
+           <option value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
+           @endforeach
+          </select>
+        </div>
+        <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="dari">Dari Jam</label>
+            <input type="time" class="form-control" id="dari" name="dari" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="sampai">Sampai Jam</label>
+            <input type="time" class="form-control" id="sampai" name="sampai" placeholder="">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="hari">Hari/Tanggal</label>
+            <input type="date" class="form-control" id="hari" name="hari" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="is_active">Status</label>
+            <select name="is_active" id="is_active" class="form-control">
+                <option value="1">Aktif</option>
+                <option value="0">Tidak Aktif</option>
+            </select>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
+          <button type="submit" class="btn bg-gradient-info">Simpan</button>
+        </div>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
+

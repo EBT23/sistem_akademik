@@ -102,7 +102,7 @@
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle">
-                      <a class="btn  btn-sm bg-gradient-warning text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-notification{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                      <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-notification{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                       <div class="col-md-4">
                         <div class="modal fade" id="modal-notification{{  $item->id  }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                           <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
@@ -119,13 +119,13 @@
                               <div class="modal-body">
                                 <div class="py-3 text-center">
                                   <i class="ni ni-bell-55 ni-3x text-warning"></i><br>
-                                  <h7 class="text-gradient text-danger">Apakah yakin kamu ingin menghapus Akun <b>{{ $item->full_name }}</b> !</h7>
+                                  <h7 class="text-gradient text-danger">Apakah yakin kamu ingin menghapus Akun <br><b>{{ $item->full_name }}</b> !</h7>
                                   {{-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> --}}
                                 </div>
                               </div>
                               <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success">Ya, Hapus</button>
-                                <button type="button" class="btn bg-gradient-warning text-white ml-auto" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn bg-gradient-secondary text-white ml-auto" data-bs-dismiss="modal">Batal</button>
                               </div>
                               </form>
                             </div>
