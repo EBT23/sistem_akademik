@@ -11,14 +11,15 @@ class ScheduleController extends Controller
     public function schedule()
     {
         $data['title'] = 'Kelola Jadwal';
-
+        
         $materi = DB::table('materi')->get();
         $schedule = DB::table('jadwal')
         ->join('materi','materi.id','=','jadwal.materi_id')
         ->select('jadwal.*','materi.nama_materi')
         ->get();
+        
 
-        return view('admin.schedule',['schedule' => $schedule ,'materi' => $materi], $data);
+        return view('admin.schedule',compact('schedule','materi'), $data);
     }
 
     public function add_schedule(Request $request)

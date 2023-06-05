@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title"])
+@extends('layout.base',['title' => "$title"])
 @section('content') 
 <div class="container-fluid py-4">
     @if (Session::has('success'))
@@ -30,11 +30,11 @@
             <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Materi</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Topik</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jam</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Hari</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                <th class="text text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                <th  class="text text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -71,7 +71,7 @@
                   
                   @endif
                 </td>
-                <td class="d-flex">
+                <td class="d-flex justify-content-center">
                   <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-notification{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                   <div class="col-md-1">
                     <div class="modal fade" id="modal-notification{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
@@ -93,7 +93,7 @@
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="submit" class="btn bg-gradient-success">Ya, Hapus</button>
+                            <button type="submit" class="btn bg-gradient-info">Ya, Hapus</button>
                             <button type="button" class="btn bg-gradient-secondary text-white ml-auto" data-bs-dismiss="modal">Batal</button>
                           </div>
                           </form>
@@ -107,16 +107,16 @@
                   <div class="modal-dialog">
                   <div class="modal-content">
                       <div class="modal-header bg-gradient-info">
-                      <h5 class="modal-title text-white" id="editModalLabel">Edit Materi</h5>
+                      <h5 class="modal-title text-white" id="editModalLabel">Edit Jadwal</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                       <form action="{{  route('update.schedule', $item->id)  }}" method="POST">
                           @csrf
                           <div class="form-group col-lg">
-                            <label for="materi_id">Nama Materi</label>
+                            <label for="materi_id">Nama Topik</label>
                             <select name="materi_id" id="materi_id" class="form-control">
-                              <option selected>-Pilih Materi-</option>
+                              <option selected>-Pilih Topik-</option>
                               @foreach($materi as $pj)
                              <option @if($item->materi_id == $pj->id) selected @endif value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
                              @endforeach
@@ -173,6 +173,36 @@
     </div>
   </div>
 </div>
+
+{{-- calender --}}
+      {{-- <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-body d-flex justify-content-between align-items-center">
+                      <div class="card-title mb-0">
+                          <h4 class="mb-0">Calender</h4>
+                      </div>
+                      <div class="card-action">
+                          <a href="#" class="btn btn-primary" role="button">Back</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> --}}
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="card  ">
+                          <div class="card-body">
+                              <div id="calendar1" class="calendar"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
 </div>
 
 <!-- Modal -->
@@ -187,9 +217,9 @@
        <form action="{{ route('add.schedule') }}" method="POST">
         @csrf
         <div class="form-group col-lg">
-          <label for="full_name">Nama Materi</label>
+          <label for="full_name">Nama Topik</label>
           <select name="materi_id" id="materi_id" class="form-control">
-            <option selected>-Pilih Materi-</option>
+            <option selected>-Pilih Topik-</option>
             @foreach($materi as $pj)
            <option value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
            @endforeach
@@ -221,13 +251,47 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
           <button type="submit" class="btn bg-gradient-info">Simpan</button>
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
         </div>
        </form>
       </div>
     </div>
   </div>
 </div>
+
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: ['dayGrid', 'timeGrid', 'list'],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+    },
+    initialView: 'dayGridMonth',
+    views: {
+      dayGridMonth: {
+        buttonText: 'Bulan',
+      },
+      timeGridWeek: {
+        buttonText: 'Minggu',
+      },
+      timeGridDay: {
+        buttonText: 'Hari',
+      },
+      listWeek: {
+        buttonText: 'Daftar',
+      },
+    },
+    events: '/schedule',
+  });
+
+  calendar.render();
+  });
+  </script>
 @endsection
 

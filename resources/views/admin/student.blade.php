@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title"])
+@extends('layout.base',['title' => "$title"])
 @section('content') 
 
 
@@ -9,7 +9,7 @@
   </div>
   @endif
   <div class="row">
-      <div class="col-5 shadow">
+      <div class="col-5">
         <div class="card mb-5">
           <div class="card-header pb-0">
             <h6 class="text-center">Buat Akun Siswa</h6>
@@ -22,6 +22,14 @@
                 <div class="form-group">
                   <label for="full_name">Nama Lengkap</label>
                   <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Masukan Nama Lengkap">
+                </div>
+                <div class="form-group">
+                  <label for="kelas">Kelas</label>
+                  <select name="kelas" id="kelas" class="form-control">
+                    <option selected>-Pilih Kelas-</option>
+                        <option value="Dasar">Dasar</option>
+                        <option value="Advanced">Advanced</option>
+                </select>
                 </div>
                 <div class="form-group">
                   <label for="umur">Umur</label>
@@ -38,13 +46,12 @@
                   <label for="kontak">Kontak</label>
                   <input type="number" class="form-control" id="kontak"  name="kontak" placeholder="Masukan no wa/hp">
                 </div>
-              </div>
-              <div class="col-lg ">
                 <div class="form-group">
                   <label for="alamat">Alamat</label>
                   <textarea  class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat"></textarea>
                 </div>
               </div>
+             
               {{-- <div class="col-md-6 ">
                 <div class="form-group">
                   <label for="password">Password</label>
@@ -71,6 +78,7 @@
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kelas</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Umur</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
@@ -92,6 +100,10 @@
                       </div>
                     </td>
                     <td>
+                      <p class="text-xs font-weight-bold mb-0">Kelas</p>
+                      <p class="text-xs text-secondary mb-0">{{ $item->kelas }}</p>
+                    </td>
+                    <td>
                       <p class="text-xs font-weight-bold mb-0">Umur</p>
                       <p class="text-xs text-secondary mb-0">{{ $item->umur }}</p>
                     </td>
@@ -101,9 +113,9 @@
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
-                    <td class="align-middle">
+                    <td class="d-flex">
                       <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-notification{{ $item->id }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                      <div class="col-md-4">
+                      <div class="col-md-1">
                         <div class="modal fade" id="modal-notification{{  $item->id  }}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                           <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
@@ -124,7 +136,7 @@
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="submit" class="btn bg-gradient-success">Ya, Hapus</button>
+                                <button type="submit" class="btn bg-gradient-info">Ya, Hapus</button>
                                 <button type="button" class="btn bg-gradient-secondary text-white ml-auto" data-bs-dismiss="modal">Batal</button>
                               </div>
                               </form>
@@ -132,145 +144,69 @@
                           </div>
                         </div>
                       </div>
-                    {{-- <a class="btn btn-sm bg-gradient-info text-white px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit</a> --}}
-                    </td>
+                    <a class="btn btn-sm bg-gradient-info text-white px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}" data-original-title="Edit user"><i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit</a>
+                  <!-- Modal -->
+                  <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-gradient-info">
+                        <h5 class="modal-title text-white" id="editModalLabel">Edit Data Siswa</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="{{  route('update.student', $item->id)  }}" method="POST">
+                            @csrf
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="full_name">Nama Siswa</label>
+                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Masukan Nama Siswa"
+                                    value="{{ $item->full_name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Masukan Email"
+                                    value="{{ $item->email }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="kelas">kelas</label>
+                                    <select name="kelas" id="kelas" class="form-control">
+                                      <option selected>-Pilih Kelas-</option>
+                                      @foreach($getSiswa as $gs)
+                                      <option @if($item->id == $gs->id_user) selected @endif value="{{ $gs->id_user }}">{{ $gs->kelas}}</option>
+                                      @endforeach
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="kontak">Kontak</label>
+                                  <input type="text" class="form-control" id="kontak" name="kontak" placeholder="Masukan Kontak"
+                                  value="{{ $item->kontak }}">
+                                </div>
+                                <div class="form-group">
+                                  <label for="umur">Umur</label>
+                                  <input type="text" class="form-control" id="umur" name="umur" placeholder="Masukan Umur"
+                                  value="{{ $item->umur }}">
+                                </div>
+                                <div class="form-group">
+                                  <label for="alamat">Alamat</label>
+                                  <input  class="form-control" id="alamat" name="alamat" value="{{ $item->alamat }}" placeholder="Masukan Alamat"></input>
+                                </div>
+                              </div>
+                            </div>
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-sm bg-gradient-info">Simpan</button>
+                              <button type="button" class="btn btn-sm bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
+                              </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>  
+                  </td>
                   </tr>
                   @endforeach
-                  {{-- <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Programator</p>
-                      <p class="text-xs text-secondary mb-0">Developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                    </td>
-                    <td class="align-middle ">
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Delete user"s><i class="far fa-trash-alt me-2"></i>Delete</a>
-                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user3">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                          <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Executive</p>
-                      <p class="text-xs text-secondary mb-0">Projects</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">Online</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                    </td>
-                    <td class="align-middle">
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Delete user"s><i class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user4">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Michael Levi</h6>
-                          <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Programator</p>
-                      <p class="text-xs text-secondary mb-0">Developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">Online</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                    </td>
-                    <td class="align-middle">
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Delete user"s><i class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user5">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Richard Gran</h6>
-                          <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      <p class="text-xs text-secondary mb-0">Executive</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                    </td>
-                    <td class="align-middle">
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Delete user"s><i class="far fa-trash-alt me-2"></i>Delete</a>
-                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                          <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Programtor</p>
-                      <p class="text-xs text-secondary mb-0">Developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                    </td>
-                    <td class="align-middle">
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Delete user"s><i class="far fa-trash-alt me-2"></i>Delete</a>
-                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-toggle="tooltip" data-original-title="Edit user"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                    </td>
-                  </tr> --}}
                 </tbody>
               </table>
             </div>

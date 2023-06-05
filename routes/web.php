@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(StudentController::class)->group( function(){
         Route::get('/student','student')->name('student');
         Route::post('/student/add','add_student')->name('add.student');
+        Route::post('/student-update/{id}','update_student')->name('update.student');
         Route::delete('student-delete/{id}','delete_student')->name('delete.student');
     });
 
@@ -49,11 +52,18 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/schedule/delete/{id}','delete_schedule')->name('delete.schedule');
     });
 
-    Route::controller(MateriController::class)->group( function (){
-        Route::get('/materi','materi')->name('materi');
-        Route::post('/materi/add','add_materi')->name('add.materi');
-        Route::post('/materi/update/{id}','update_materi')->name('update.materi');
-        Route::delete('/materi/delete/{id}','delete_materi')->name('delete.materi');
+    Route::controller(TopicController::class)->group( function (){
+        Route::get('/topic','topic')->name('topic');
+        Route::post('/topic/add','add_topic')->name('add.topic');
+        Route::post('/topic/update/{id}','update_topic')->name('update.topic');
+        Route::delete('/topic/delete/{id}','delete_topic')->name('delete.topic');
+    });
+
+    Route::controller(InformationController::class)->group( function (){
+        Route::get('/information','index')->name('information');
+        Route::post('/information/add','add_information')->name('add.information');
+        Route::post('/information/update/{id}','update_information')->name('update.information');
+        Route::delete('/information/delete/{id}','delete_information')->name('delete.information');
     });
 
     Route::controller(ProfileController::class)->group( function(){

@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title"])
+@extends('layout.base',['title' => "$title"])
 @section('content') 
 
 
@@ -124,7 +124,7 @@
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="submit" class="btn bg-gradient-success">Ya, Hapus</button>
+                                <button type="submit" class="btn bg-gradient-info">Ya, Hapus</button>
                                 <button type="button" class="btn bg-gradient-secondary text-white ml-auto" data-bs-dismiss="modal">Batal</button>
                               </div>
                               </form>

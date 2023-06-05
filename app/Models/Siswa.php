@@ -23,4 +23,11 @@ class Siswa extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // protected $enumKelas = ['Dasar', 'Advanced'];
+
+    // public function getKelasOptions()
+    // {
+    //     return $this->enumKelas;
+    // }
 }
