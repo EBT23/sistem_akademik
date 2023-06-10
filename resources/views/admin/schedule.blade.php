@@ -19,11 +19,66 @@
                   <i class="ni ni-fat-add"></i>
                   <span class="ms-2">Add</span>
                 </a>
+                
               </li>
             </ul>
           </div>
         </div>
       </div>
+      <!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-gradient-info">
+        <h5 class="modal-title text-white" id="addModalLabel">Tambah Jadwal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form action="{{ route('add.schedule') }}" method="POST">
+        @csrf
+        <div class="form-group col-lg">
+          <label for="full_name">Nama Topik</label>
+          <select name="materi_id" id="materi_id" class="form-control">
+            <option selected>-Pilih Topik-</option>
+            @foreach($materi as $pj)
+           <option value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
+           @endforeach
+          </select>
+        </div>
+        <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="dari">Dari Jam</label>
+            <input type="time" class="form-control" id="dari" name="dari" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="sampai">Sampai Jam</label>
+            <input type="time" class="form-control" id="sampai" name="sampai" placeholder="">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="hari">Hari/Tanggal</label>
+            <input type="date" class="form-control" id="hari" name="hari" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="is_active">Status</label>
+            <select name="is_active" id="is_active" class="form-control">
+                <option value="1">Aktif</option>
+                <option value="0">Tidak Aktif</option>
+            </select>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn bg-gradient-info">Simpan</button>
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
+        </div>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
           <table id="dataTable" class="table align-items-center mb-0">
@@ -205,60 +260,7 @@
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-gradient-info">
-        <h5 class="modal-title text-white" id="addModalLabel">Tambah Jadwal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <form action="{{ route('add.schedule') }}" method="POST">
-        @csrf
-        <div class="form-group col-lg">
-          <label for="full_name">Nama Topik</label>
-          <select name="materi_id" id="materi_id" class="form-control">
-            <option selected>-Pilih Topik-</option>
-            @foreach($materi as $pj)
-           <option value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
-           @endforeach
-          </select>
-        </div>
-        <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="dari">Dari Jam</label>
-            <input type="time" class="form-control" id="dari" name="dari" placeholder="">
-          </div>
-          <div class="form-group">
-            <label for="sampai">Sampai Jam</label>
-            <input type="time" class="form-control" id="sampai" name="sampai" placeholder="">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="hari">Hari/Tanggal</label>
-            <input type="date" class="form-control" id="hari" name="hari" placeholder="">
-          </div>
-          <div class="form-group">
-            <label for="is_active">Status</label>
-            <select name="is_active" id="is_active" class="form-control">
-                <option value="1">Aktif</option>
-                <option value="0">Tidak Aktif</option>
-            </select>
-          </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn bg-gradient-info">Simpan</button>
-          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Kembali</button>
-        </div>
-       </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 <script>

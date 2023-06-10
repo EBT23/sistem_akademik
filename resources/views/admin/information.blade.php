@@ -79,7 +79,7 @@
                                        </div>
                                        <div class="form-group">
                                         <label for="konten">Konten</label>
-                                        <textarea name="konten" id="konten" cols="30" rows="8">{{ $inf->konten }}</textarea>
+                                        <textarea name="konten" id="konten" cols="30" rows="10">{{ $inf->konten }}</textarea>
                                       </div>
                                        <div class="modal-footer">
                                          <button type="submit" class="btn bg-gradient-info">Simpan</button>
