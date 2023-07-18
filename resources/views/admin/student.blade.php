@@ -9,7 +9,7 @@
   </div>
   @endif
   <div class="row">
-      <div class="col-5">
+      {{-- <div class="col-5">
         <div class="card mb-5">
           <div class="card-header pb-0">
             <h6 class="text-center">Buat Akun Siswa</h6>
@@ -51,13 +51,6 @@
                   <textarea  class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat"></textarea>
                 </div>
               </div>
-             
-              {{-- <div class="col-md-6 ">
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password"  name="password" placeholder="Masukan Password">
-                </div>
-              </div> --}}
               <div class="sidenav-footer">
                 <br>
                 <button type="submit" class="btn bg-gradient-info btn mb-0 w-100">Simpan</button>
@@ -66,8 +59,8 @@
           </form>
           </div>
         </div>
-      </div>
-      <div class="col-7">
+      </div> --}}
+      <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
             <h6 class="text-center">Akun Siswa</h6>
