@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::post('/login', [ApiAuthController::class, 'login']);
 
@@ -30,6 +27,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::controller(ApiAdminController::class)->group(function (){
         Route::get('/information','information');
+        Route::post('/pendaftaran','pendaftaran');
+        Route::get('/nilai_ujian','nilai_ujian');
+        Route::get('/nilai_lpk','nilai_lpk');
+        Route::post('/input_nilai_lpk','input_nilai_lpk');
+        Route::put('/update_nilai_lpk/{id}','update_nilai_lpk');
+        Route::delete('/delete_nilai_lpk/{id}','delete_nilai_lpk');
+        Route::get('/jadwal','jadwal');
     });
 
 });
