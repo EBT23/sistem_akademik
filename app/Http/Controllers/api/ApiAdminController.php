@@ -212,4 +212,47 @@ class ApiAdminController extends Controller
 
         return response()->json(['message' => 'Gagal menghapus data nilai LPK'], 500);
     }
+    public function get_siswa() {
+        $siswa = DB::select("SELECT siswa.id_siswa, users.full_name, siswa.nis 
+                                FROM siswa, users 
+                                WHERE siswa.id_user = users.id");
+
+        return response()->json(['message' => 'Data berhasi ditampilkan', 'data' => $siswa]);
+    }
+    public function get_siswa_by_id()  {
+        $id_user = Auth::id();
+        $siswa = DB::select("SELECT siswa.id_siswa, users.full_name, siswa.nis 
+                                FROM siswa, users 
+                                WHERE siswa.id_user = users.id
+                                AND users.id = $id_user");
+
+        return response()->json(['message' => 'Data berhasi ditampilkan', 'data' => $siswa]);
+    }
+    public function materi(){
+        $materi = DB::select("SELECT *
+        FROM materi");
+
+        return response()->json(['message' => 'Data berhasi ditampilkan', 'data' => $materi]);
+    }
+    public function nilailpk_by_siswa() {
+        $id_user = Auth::id();
+        $nilailpk_by_siswa = DB::select("SELECT nilai_lpk.*, materi.nama_materi, users.full_name, siswa.nis
+                                FROM nilai_lpk, materi, users, siswa
+                                WHERE nilai_lpk.id_materi = materi.id
+                                AND nilai_lpk.id_user = users.id
+                                AND users.id = siswa.id_user
+                                AND users.id = $id_user");
+
+        return response()->json(['message' => 'Data berhasi ditampilkan', 'data' => $nilailpk_by_siswa]);
+    }
+    public function nilaiujian_by_siswa() {
+        $id_user = Auth::id();
+        $nilaiujian_by_siswa = DB::select("SELECT nilai_ujian.*,  users.full_name, siswa.nis
+                                FROM nilai_ujian, users, siswa
+                                WHERE nilai_ujian.id_siswa = siswa.id_siswa
+                                AND users.id = siswa.id_user
+                                AND users.id = $id_user");
+
+        return response()->json(['message' => 'Data berhasi ditampilkan', 'data' => $nilaiujian_by_siswa]);
+    }
 }

@@ -131,25 +131,129 @@
                                     <a href="{{ asset('uploads').'/'.$item->bukti_bayar }}" target="_blank"
                                         rel="noopener noreferrer">{{ $item->bukti_bayar }}</a>
                                 </td>
+                                <td class="align-middle text-center text-sm">
+                                    @if ( $item->status_bayar == 'Pending')
+                                    <p class="badge bg-danger">{{ $item->status_bayar }}</p>
+                                    @else
+                                    <p class="badge bg-success">{{ $item->status_bayar }}</p>
+                                    @endif
+                                </td>
                                 <td class="d-flex">
-                                    <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;"
-                                        data-bs-toggle="modal" data-bs-target="#modal-notification{{ $item->id }}"><i
-                                            class="far fa-trash-alt me-2"></i>Delete</a>
+                                    @if ($item->status_bayar == 'Pending')
+                                    <a class="btn  btn-sm bg-gradient-success text-white px-3 mb-0" href="javascript:;"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-notification1{{ $item->id_user }}"><i
+                                            class="far fa-trash-alt me-2"></i>Konfirmasi</a>
                                     <div class="col-md-1">
-                                        <div class="modal fade" id="modal-notification{{  $item->id  }}" tabindex="-1"
-                                            role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                                        <div class="modal fade" id="modal-notification1{{  $item->id_user }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="modal-notification1"
+                                            aria-hidden="true">
                                             <div class="modal-dialog modal-danger modal-dialog-centered modal-"
                                                 role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-gradient-info">
                                                         <h6 class="modal-title text-white"
-                                                            id="modal-title-notification">Hapus Nilai</h6>
+                                                            id="modal-title-notification">Konfirmasi Pendaftaran</h6>
                                                         <button type="button" class="btn-close text-dark"
                                                             data-bs-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
-                                                    <form action="{{ route('delete.nilai_ujian',$item->id)  }}"
+                                                    <form action="{{ route('acc_status_pembayaran',$item->id_user)  }}"
+                                                        method="POST">
+                                                        @method('POST')
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="py-3 text-center">
+                                                                <i class="ni ni-bell-55 ni-3x text-warning"></i><br>
+                                                                <h7 class="text-gradient text-danger">Apakah kamu yakin,
+                                                                    ingin mengkonfirmasi data ini <b>?</b></h7>
+                                                                {{-- <p>A small river named Duden flows by their place
+                                                                    and supplies it with the necessary regelialia.</p>
+                                                                --}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-info">Ya,
+                                                                Konfirmasi</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @else
+                                    <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-notification2{{ $item->id_user }}"><i
+                                            class="far fa-trash-alt me-2"></i>Batalkan</a>
+                                    <div class="col-md-1">
+                                        <div class="modal fade" id="modal-notification2{{  $item->id_user }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="modal-notification1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-gradient-info">
+                                                        <h6 class="modal-title text-white"
+                                                            id="modal-title-notification">Batalkan Konfirmasi</h6>
+                                                        <button type="button" class="btn-close text-dark"
+                                                            data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <form
+                                                        action="{{ route('batalkan_status_pembayaran',$item->id_user)  }}"
+                                                        method="POST">
+                                                        @method('POST')
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="py-3 text-center">
+                                                                <i class="ni ni-bell-55 ni-3x text-warning"></i><br>
+                                                                <h7 class="text-gradient text-danger">Apakah kamu yakin,
+                                                                    ingin membatalkan data ini <b>?</b>
+                                                                </h7>
+                                                                {{-- <p>A small river named Duden flows by their place
+                                                                    and supplies it with the necessary regelialia.</p>
+                                                                --}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-info">Ya,
+                                                                Konfirmasi</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+
+
+                                    <a class="btn  btn-sm bg-gradient-danger text-white px-3 mb-0" href="javascript:;"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-notification{{ $item->id_user }}"><i
+                                            class="far fa-trash-alt me-2"></i>Delete</a>
+                                    <div class="col-md-1">
+                                        <div class="modal fade" id="modal-notification{{  $item->id_user  }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-gradient-info">
+                                                        <h6 class="modal-title text-white"
+                                                            id="modal-title-notification">Hapus Pendaftaran</h6>
+                                                        <button type="button" class="btn-close text-dark"
+                                                            data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="{{ route('delete.pendaftaran',$item->id_user)  }}"
                                                         method="POST">
                                                         @method('DELETE')
                                                         @csrf

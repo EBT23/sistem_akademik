@@ -81,5 +81,8 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::controller(PendaftaranController::class)->group( function(){
         Route::get('/pendaftaran', 'pendaftaran')->name('pendaftaran');
+        Route::post('/pendaftaran/acc_status_pembayaran/{id}', 'acc_status_pembayaran')->name('acc_status_pembayaran');
+        Route::post('/pendaftaran/batalkan_status_pembayaran/{id}', 'batalkan_status_pembayaran')->name('batalkan_status_pembayaran');
+        Route::get('/pendaftaran/delete', 'delete_pendaftaran')->name('delete.pendaftaran');
     });
 });

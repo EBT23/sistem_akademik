@@ -34,6 +34,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/update_nilai_lpk/{id}','update_nilai_lpk');
         Route::delete('/delete_nilai_lpk/{id}','delete_nilai_lpk');
         Route::get('/jadwal','jadwal');
+        Route::get('/materi','materi');
+        Route::get('/get_siswa','get_siswa');
+        Route::get('/get_siswa_by_id','get_siswa_by_id');
+        Route::get('/nilailpk_by_siswa','nilailpk_by_siswa');
+        Route::get('/nilaiujian_by_siswa','nilaiujian_by_siswa');
+
     });
 
 });

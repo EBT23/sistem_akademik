@@ -17,4 +17,33 @@ class PendaftaranController extends Controller
 
         return view('admin.pendaftaran', compact('pendaftaran'),$data);
     }
+    public function acc_status_pembayaran($id) {
+        DB::table('siswa')
+            ->where('id_user', $id)
+            ->update([
+                'status_bayar' => 'Lunas'
+            ]);
+            return redirect()
+            ->route('pendaftaran')
+            ->with('success', 'Pembayaran berhasil diverifikasi');
+    }
+    public function batalkan_status_pembayaran($id) {
+        DB::table('siswa')
+            ->where('id_user', $id)
+            ->update([
+                'status_bayar' => 'Pending'
+            ]);
+            return redirect()
+            ->route('pendaftaran')
+            ->with('success', 'Pembayaran berhasil dibatalkan');
+    }
+    public function delete_pendaftaran($id) {
+        DB::table('users')
+            ->where('id', $id)
+            ->delete();
+
+        return redirect() 
+            ->route('pendaftaran')
+            ->with('success', 'Pendaftaran berhasil dihapus');
+    }
 }
