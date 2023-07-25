@@ -14,11 +14,15 @@ class DashboardController extends Controller
         // count siswa
         $role = 2; 
         $siswaCount = DB::table('users')->where('role', $role)->count();
+        $pendaftarBelumLunas = DB::select("SELECT COUNT(siswa.id_siswa) as jumlah FROM siswa WHERE siswa.status_bayar = 'Pending'");
+        $pendaftarBelumLunas = $pendaftarBelumLunas[0]->jumlah;
+        $pendaftarLunas = DB::select("SELECT COUNT(siswa.id_siswa) as jumlah FROM siswa WHERE siswa.status_bayar = 'Lunas'");
+        $pendaftarLunas = $pendaftarLunas[0]->jumlah;
 
         // count pengajar
         $role = 3; 
         $pengajarCount = DB::table('users')->where('role', $role)->count();
 
-        return view('dashboard',  compact('siswaCount','pengajarCount'), $data);
+        return view('dashboard',  compact('siswaCount','pengajarCount','pendaftarBelumLunas','pendaftarLunas'), $data);
     }
 }

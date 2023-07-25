@@ -1,4 +1,4 @@
- <!--
+<!--
 =========================================================
 * Argon Dashboard 2 - v2.0.4
 =========================================================
@@ -36,78 +36,82 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+  <div class="position-absolute w-100 min-height-300 top-0"
+    style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-6"></span>
   </div>
-  @include('layouts.sidebar')
-  
+  @include('layout.sidebar')
+
   <div class="main-content position-relative max-height-vh-100 h-100">
     <div class="card shadow-lg mx-4 card-profile-bottom">
-        <div class="card-body p-3 ">
-          <div class="row gx-4">
-            <div class="col-auto">
-              <div class="avatar avatar-xl position-relative">
-                <img src="../assets/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-              </div>
+      <div class="card-body p-3 ">
+        <div class="row gx-4">
+          <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+              <img src="../assets/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
-            <div class="col-auto my-auto">
-              <div class="h-100">
-                <h5 class="mb-1">
-                  {{ Auth::user()->full_name }}
-                </h5>
-                <p class="mb-0 font-weight-bold text-sm">
-                  Public Relations
-                </p>
-              </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">
+                {{ Auth::user()->full_name }}
+              </h5>
+              <p class="mb-0 font-weight-bold text-sm">
+                Public Relations
+              </p>
             </div>
-            <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-              <div class="nav-wrapper position-relative end-0">
-                <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
-                      <i class="ni ni-app"></i>
-                      <span class="ms-2">App</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                      <i class="ni ni-email-83"></i>
-                      <span class="ms-2">Messages</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                      <i class="ni ni-settings-gear-65"></i>
-                      <span class="ms-2">Settings</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+          </div>
+          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+              <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center "
+                    data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                    <i class="ni ni-app"></i>
+                    <span class="ms-2">App</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center "
+                    data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                    <i class="ni ni-email-83"></i>
+                    <span class="ms-2">Messages</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center "
+                    data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                    <i class="ni ni-settings-gear-65"></i>
+                    <span class="ms-2">Settings</span>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
-  @yield('content')
+    </div>
+    @yield('content')
   </div>
-@include('layouts.footer')
- <!--   Core JS Files   -->
- <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
- <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
- <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
- <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
- <script>
-   var win = navigator.platform.indexOf('Win') > -1;
+  @include('layout.footer')
+  <!--   Core JS Files   -->
+  <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+  <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+  <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
    if (win && document.querySelector('#sidenav-scrollbar')) {
      var options = {
        damping: '0.5'
      }
      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
    }
- </script>
- <!-- Github buttons -->
- <script async defer src="https://buttons.github.io/buttons.js"></script>
- <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
- <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
 </body>
 
 </html>
