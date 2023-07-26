@@ -41,7 +41,23 @@ class NilaiUjianCotroller extends Controller
             ->route('nilai_ujian')
             ->with('success', 'Nilai ujian berhasil ditambahkan');
     }
+    public function update_nilai_ujian(Request $request, $id)  {
 
+        $request->validate(['nil_ujian' => 'required',
+        'siswa' => 'required'
+        ], );
+
+        $data = [
+        'id_siswa' => $request->siswa,
+        'nil_ujian' => $request->nil_ujian
+        ];
+        DB::table('nilai_ujian')
+        ->where('id', $id)
+        ->update($data);
+        return redirect()
+            ->route('nilai_ujian')
+            ->with('success', 'Nilai ujian berhasil diubah');
+    }
     // public function update_materi(Request $request, $id)
     // {
     //     // Validasi request
