@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(TeacherController::class)->group( function (){
         Route::get('/teacher','teacher')->name('teacher');
         Route::post('/teacher/add','add_teacher')->name('add.teacher');
-        Route::post('/teacher-delete/{id}','delete_teacher')->name('delete.teacher');
+        Route::delete('/teacher-delete/{id}','delete_teacher')->name('delete.teacher');
     });
 
     Route::controller(ScheduleController::class)->group( function (){
