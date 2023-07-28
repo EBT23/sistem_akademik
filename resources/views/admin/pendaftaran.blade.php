@@ -34,14 +34,11 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
                                     Lengkap
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email
-                                </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIK
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No
                                     Telepon
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kelas
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Umur
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat,
                                     Tanggal Lahir
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -78,17 +75,11 @@
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
-                                        {{-- <div>
-                                            <img src="https://api.dicebear.com/5.x/pixel-art/svg?seed=7216"
-                                                class="avatar avatar-sm me-3" alt="user1">
-                                        </div> --}}
                                         <div class="d-flex flex-column justify-content-center">
-                                            <p class="text-xs text-secondary mb-0">{{ $item->full_name }}</p>
+                                            <h6 class="mb-0 text-sm">{{ $item->full_name }}</h6>
+                                            <p class="text-xs text-secondary mb-0">{{ $item->email }}</p>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{ $item->email }}
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     {{ $item->ktp }}
@@ -96,17 +87,20 @@
                                 <td class="align-middle text-center text-sm">
                                     {{ $item->kontak }}
                                 </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{ $item->kelas }}
+                                <td class="align-middle text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">Kelas</p>
+                                     <p class="text-xs text-secondary mb-0">{{ $item->kelas }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm">
+                                <td class="align-middle text-sm">
                                     {{ $item->alamat }}
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    {{ $item->umur }}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{ $item->tempat_lahir.', '.$item->tgl_lahir }}
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ $item->tempat_lahir.', '.$item->tgl_lahir }}</h6>
+                                            <p class="text-xs text-secondary mb-0">{{ $item->umur }} Tahun</p>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     {{ $item->pendidikan_terakhir }}
