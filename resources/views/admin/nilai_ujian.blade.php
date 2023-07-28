@@ -29,7 +29,9 @@
                             <div class="col-lg">
                                 <div class="form-group">
                                     <label for="siswa">Pilih Siswa</label>
-                                    <select class="form-select" name="siswa" id="siswa">
+                                    <select class="form-select" name="siswa" id="siswa" required
+                                        oninvalid="this.setCustomValidity('data tidak boleh kosong')"
+                                        oninput="setCustomValidity('')">
                                         <option value="" selected>Pilih Siswa</option>
                                         @foreach ($siswa as $s)
                                         <option value="{{ $s->id_siswa }}">{{ $s->nis.'-'.$s->full_name }}</option>
@@ -39,7 +41,9 @@
                                 <div class="form-group">
                                     <label for="nil_ujian">Nilai Ujian</label>
                                     <input type="number" class="form-control" id="nil_ujian" name="nil_ujian"
-                                        placeholder="Masukan Nilai Ujian">
+                                        placeholder="Masukan Nilai Ujian" required
+                                        oninvalid="this.setCustomValidity('data tidak boleh kosong')"
+                                        oninput="setCustomValidity('')">
                                 </div>
                                 <div class="sidenav-footer">
                                     <br>

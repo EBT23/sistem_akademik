@@ -39,8 +39,9 @@
                   @csrf
                   <div class="form-group col-lg">
                     <label for="full_name">Nama Topik</label>
-                    <select name="materi_id" id="materi_id" class="form-control">
-                      <option selected>-Pilih Topik-</option>
+                    <select name="materi_id" id="materi_id" class="form-control" required
+                      oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
+                      <option value="" selected>-Pilih Topik-</option>
                       @foreach($materi as $pj)
                       <option value="{{ $pj->id }}">{{ $pj->nama_materi}}</option>
                       @endforeach
@@ -50,21 +51,25 @@
                     <div class="col-6">
                       <div class="form-group">
                         <label for="dari">Dari Jam</label>
-                        <input type="time" class="form-control" id="dari" name="dari" placeholder="">
+                        <input type="time" class="form-control" id="dari" name="dari" placeholder="" required
+                          oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                       </div>
                       <div class="form-group">
                         <label for="sampai">Sampai Jam</label>
-                        <input type="time" class="form-control" id="sampai" name="sampai" placeholder="">
+                        <input type="time" class="form-control" id="sampai" name="sampai" placeholder="" required
+                          oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
                         <label for="hari">Hari/Tanggal</label>
-                        <input type="date" class="form-control" id="hari" name="hari" placeholder="">
+                        <input type="date" class="form-control" id="hari" name="hari" placeholder="" required
+                          oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                       </div>
                       <div class="form-group">
                         <label for="is_active">Status</label>
-                        <select name="is_active" id="is_active" class="form-control">
+                        <select name="is_active" id="is_active" class="form-control" required
+                          oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                           <option value="1">Aktif</option>
                           <option value="0">Tidak Aktif</option>
                         </select>

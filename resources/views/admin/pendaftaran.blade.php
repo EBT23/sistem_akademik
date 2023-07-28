@@ -128,8 +128,8 @@
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <!-- Button trigger modal -->
-                                    <a href="{{ asset('uploads').'/'.$item->bukti_bayar }}" target="_blank"
-                                        rel="noopener noreferrer">{{ $item->bukti_bayar }}</a>
+                                    <a href="{{ 'https://siakadlpk.dlhcode.com/bukti_bayar/'.$item->bukti_bayar }}"
+                                        target="_blank" rel="noopener noreferrer">{{ $item->bukti_bayar }}</a>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     @if ( $item->status_bayar == 'Pending')
