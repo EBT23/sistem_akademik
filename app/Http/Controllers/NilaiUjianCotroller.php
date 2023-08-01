@@ -78,6 +78,18 @@ class NilaiUjianCotroller extends Controller
             ->route('nilai_ujian')
             ->with('success', 'Nilai ujian berhasil diubah');
     }
+
+
+    public function delete_nilai_ujian($id)
+    {
+        DB::table('nilai_ujian')
+            ->where('id', $id)
+            ->delete();
+
+        return redirect() 
+            ->route('nilai_ujian')
+            ->with('success', 'Nilai Ujian berhasil dihapus');
+    }
     // public function update_materi(Request $request, $id)
     // {
     //     // Validasi request
