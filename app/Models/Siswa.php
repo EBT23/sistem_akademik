@@ -12,7 +12,7 @@ class Siswa extends Model
     protected $table = 'siswa';
     protected $fillable = [
 
-        'id_siswa',
+        'id_siswa' ,
         'id_angkatan',
         'id_user',
         'kontak',
@@ -20,9 +20,10 @@ class Siswa extends Model
         'alamat',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        // Ubah argumen kedua menjadi sesuai dengan foreign key yang ada di tabel 'siswa'
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 
     // protected $enumKelas = ['Dasar', 'Advanced'];

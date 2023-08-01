@@ -61,6 +61,9 @@
                 <h6 class="text-center">NILAI UJIAN</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+                <div>
+                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" type="submit">Export</a>
+                </div>
                 <div class="table-responsive p-0">
                     <table id="dataTable" class="table align-items-center mb-0">
                         <thead>
@@ -215,6 +218,9 @@
                 <h6 class="text-center">NILAI LPK</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+                <div>
+                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" type="submit">Export</a>
+                </div>
                 <div class="table-responsive p-0">
                     <table id="dataTable" class="table align-items-center mb-0">
                         <thead>

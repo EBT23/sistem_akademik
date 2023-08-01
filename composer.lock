@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbecbd0773a26ab6da945797451e68dc",
+    "content-hash": "236d12839a2a90368b7817f4c55cc392",
     "packages": [
         {
             "name": "brick/math",
@@ -1115,6 +1115,51 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "icewind/streams",
+            "version": "v0.7.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/icewind1991/Streams.git",
+                "reference": "64200fd7cfcc7f550c3c695c48d8fd8bba97fecb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/icewind1991/Streams/zipball/64200fd7cfcc7f550c3c695c48d8fd8bba97fecb",
+                "reference": "64200fd7cfcc7f550c3c695c48d8fd8bba97fecb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Icewind\\Streams\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Appelman",
+                    "email": "icewind@owncloud.com"
+                }
+            ],
+            "description": "A set of generic stream wrappers",
+            "support": {
+                "issues": "https://github.com/icewind1991/Streams/issues",
+                "source": "https://github.com/icewind1991/Streams/tree/v0.7.7"
+            },
+            "time": "2023-03-16T14:52:25+00:00"
         },
         {
             "name": "laravel/framework",

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai_ujian;
 use Illuminate\Http\Request;
+use App\Exports\NilaiUjianExport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use ZipStream\Option\Archive;
 
 class NilaiUjianCotroller extends Controller
 {
@@ -28,6 +32,15 @@ class NilaiUjianCotroller extends Controller
             ->get();
          
         return view('admin.nilai_ujian', compact('nilai_ujian', 'siswa','nilai_lpk'),$data);
+    }
+
+
+
+    public function exportToExcel()
+    {
+        $nilaiUjian = Nilai_ujian::with('siswa.user')->get();
+
+        return Excel::download(new NilaiUjianExport($nilaiUjian), 'nilai_ujian.xlsx');
     }
 
     public function add_nilai_ujian(Request $request)

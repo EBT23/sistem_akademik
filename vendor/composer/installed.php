@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '806b168787a47fa502c0be54d32aa9af7379344c',
+        'reference' => 'cfa7951321b819db38d8cceacfca98cd9245123c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -174,6 +174,15 @@
             'install_path' => __DIR__ . '/../hamcrest/hamcrest-php',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'icewind/streams' => array(
+            'pretty_version' => 'v0.7.7',
+            'version' => '0.7.7.0',
+            'reference' => '64200fd7cfcc7f550c3c695c48d8fd8bba97fecb',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../icewind/streams',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'illuminate/auth' => array(
             'dev_requirement' => false,
@@ -391,7 +400,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '806b168787a47fa502c0be54d32aa9af7379344c',
+            'reference' => 'cfa7951321b819db38d8cceacfca98cd9245123c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
