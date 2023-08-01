@@ -73,6 +73,7 @@
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kelas</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Umur</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Angkatan</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
                     <th class="text text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
@@ -99,6 +100,14 @@
                     <td>
                       <p class="text-xs font-weight-bold mb-0">Umur</p>
                       <p class="text-xs text-secondary mb-0">{{ $item->umur }}</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">Angkatan</p>
+                      <p class="text-xs text-secondary mb-0">@if ($item->id_angkatan==1)
+                      <p class="text-xs text-secondary mb-0">{{ $item->thn_angkatan }}- Active</p>
+                      @else
+                      <p class="text-xs text-secondary mb-0">{{ $item->thn_angkatan }}- Non Active</p>
+                      @endif</p>
                     </td>
                     <td class="align-middle text-center text-sm">
                       <span class="badge badge-sm bg-gradient-success">Online</span>

@@ -17,7 +17,8 @@ class StudentController extends Controller
         $getSiswa = DB::table('siswa')->get();
         $student = DB::table('siswa')
         ->join('users','users.id','=','siswa.id_user')
-        ->select('siswa.*','users.id', 'users.full_name','users.email')
+        ->join('angkatan','angkatan.id','=','siswa.id_angkatan')
+        ->select('siswa.*','users.id', 'users.full_name','users.email','angkatan.thn_angkatan')
         ->where('users.role','=','2')
         ->get();
 
