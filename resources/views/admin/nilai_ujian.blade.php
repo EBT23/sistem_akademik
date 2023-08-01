@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nil_ujian">Nilai Ujian</label>
-                                    <input type="number" class="form-control" id="nil_ujian" name="nil_ujian"
+                                    <input type="number" class="form-control" id="nil_ujian" name="nil_ujian" max="200" min="0"
                                         placeholder="Masukan Nilai Ujian" required
                                         oninvalid="this.setCustomValidity('data tidak boleh kosong')"
                                         oninput="setCustomValidity('')">
@@ -201,6 +201,75 @@
                                         </div>
                                     </div>
                                 </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6 class="text-center">NILAI LPK</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table id="dataTable" class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    No</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIS
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
+                                    Siswa
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
+                                    Materi
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nilai LPK
+                                </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($nilai_lpk as $no => $item)
+                            <tr>
+                                <td class="align-middle text-center text-sm">
+                                    {{ $no+1 }}
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        {{-- <div>
+                                            <img src="https://api.dicebear.com/5.x/pixel-art/svg?seed=7216"
+                                                class="avatar avatar-sm me-3" alt="user1">
+                                        </div> --}}
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <p class="text-xs text-secondary mb-0">{{ $item->nis }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        {{-- <div>
+                                            <img src="https://api.dicebear.com/5.x/pixel-art/svg?seed=7216"
+                                                class="avatar avatar-sm me-3" alt="user1">
+                                        </div> --}}
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <p class="text-xs text-secondary mb-0">{{ $item->full_name }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    {{ $item->nama_materi }}
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    {{ $item->nilai }}
+                                </td>
+                            
                             </tr>
                             @endforeach
                         </tbody>

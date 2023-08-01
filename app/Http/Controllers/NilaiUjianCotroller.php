@@ -20,7 +20,14 @@ class NilaiUjianCotroller extends Controller
             ->select('users.full_name', 'siswa.nis', 'siswa.id_siswa')
             ->get();
 
-        return view('admin.nilai_ujian', compact('nilai_ujian', 'siswa'),$data);
+            $nilai_lpk = DB::table('nilai_lpk')
+            ->join('siswa', 'nilai_lpk.id_siswa', '=', 'siswa.id_siswa')
+            ->join('users', 'siswa.id_user', '=', 'users.id')
+            ->join('materi', 'nilai_lpk.id_materi', '=', 'materi.id')
+            ->select('nilai_lpk.id','users.full_name', 'siswa.nis', 'nilai_lpk.nilai', 'materi.nama_materi')
+            ->get();
+         
+        return view('admin.nilai_ujian', compact('nilai_ujian', 'siswa','nilai_lpk'),$data);
     }
 
     public function add_nilai_ujian(Request $request)

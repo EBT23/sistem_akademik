@@ -1,17 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\InformationController;
-use App\Http\Controllers\MateriController;
-use App\Http\Controllers\NilaiUjianCotroller;
-use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\TopicController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\TopicController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AngkatanController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NilaiUjianCotroller;
+use App\Http\Controllers\InformationController;
+use App\Http\Controllers\PendaftaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,5 +84,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/pendaftaran/acc_status_pembayaran/{id}', 'acc_status_pembayaran')->name('acc_status_pembayaran');
         Route::post('/pendaftaran/batalkan_status_pembayaran/{id}', 'batalkan_status_pembayaran')->name('batalkan_status_pembayaran');
         Route::delete('/pendaftaran/delete/{id}', 'delete_pendaftaran')->name('delete.pendaftaran');
+    });
+
+     Route::controller(AngkatanController::class)->group( function (){
+        Route::get('angkatan','angkatan')->name('angkatan');
+        Route::post('angkatan/add','add_angkatan')->name('add.angkatan');
+        Route::post('angkatan/update/{id}','update_angkatan')->name('update.angkatan');
+        Route::delete('angkatan/delete/{id}','delete_angkatan')->name('delete.angkatan');
     });
 });
