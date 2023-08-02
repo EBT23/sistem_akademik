@@ -63,7 +63,7 @@
                         alt="user1">
                     </div> --}}
                     <div class="d-flex flex-column justify-content-center">
-                      {{-- <h6 class="mb-0 text-sm">BAB 1</h6> --}}
+                      {{-- <h6 class="mb-0 text-sm">BpAB 1</h6> --}}
                       <p class="text-xs text-secondary mb-0">{{ $item->nama_materi }}</p>
                     </div>
                   </div>
