@@ -73,7 +73,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/nilai_ujian/add','add_nilai_ujian')->name('add.nilai_ujian');
         Route::post('/nilai_ujian/update/{id}','update_nilai_ujian')->name('update.nilai_ujian');
         Route::delete('/nilai_ujian/delete/{id}','delete_nilai_ujian')->name('delete.nilai_ujian');
-        Route::get('/export-nilai-ujian', 'exportToExcel')->name('export.nilai-ujian');
+        Route::get('/export-nilai-ujian', 'exportPdf')->name('export.nilai-ujian');
+        Route::get('/export-nilai-lpk', 'exportPdfLpk')->name('export.nilai-lpk');
     });
     
     Route::controller(ProfileController::class)->group( function(){

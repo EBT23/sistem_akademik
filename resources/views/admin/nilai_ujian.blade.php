@@ -40,8 +40,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nil_ujian">Nilai Ujian</label>
-                                    <input type="number" class="form-control" id="nil_ujian" name="nil_ujian" max="200" min="0"
-                                        placeholder="Masukan Nilai Ujian" required
+                                    <input type="number" class="form-control" id="nil_ujian" name="nil_ujian" max="200"
+                                        min="0" placeholder="Masukan Nilai Ujian" required
                                         oninvalid="this.setCustomValidity('data tidak boleh kosong')"
                                         oninput="setCustomValidity('')">
                                 </div>
@@ -62,7 +62,8 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div>
-                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" type="submit">Export</a>
+                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" type="submit">Cetak Nilai
+                        Ujian</a>
                 </div>
                 <div class="table-responsive p-0">
                     <table id="dataTable" class="table align-items-center mb-0">
@@ -219,7 +220,8 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div>
-                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" type="submit">Export</a>
+                    <a href="{{ route('export.nilai-lpk') }}" class="btn btn-primary mx-3" type="submit">Cetak Nilai
+                        LPK</a>
                 </div>
                 <div class="table-responsive p-0">
                     <table id="dataTable" class="table align-items-center mb-0">
@@ -236,9 +238,10 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
                                     Materi
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nilai LPK
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nilai
+                                    LPK
                                 </th>
-                              
+
                             </tr>
                         </thead>
                         <tbody>
@@ -275,7 +278,7 @@
                                 <td class="align-middle text-center text-sm">
                                     {{ $item->nilai }}
                                 </td>
-                            
+
                             </tr>
                             @endforeach
                         </tbody>

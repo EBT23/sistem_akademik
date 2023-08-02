@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nilai_ujian;
 use Illuminate\Http\Request;
-use App\Exports\NilaiUjianExport;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
-use ZipStream\Option\Archive;
 
 class NilaiUjianCotroller extends Controller
 {
@@ -34,13 +31,24 @@ class NilaiUjianCotroller extends Controller
         return view('admin.nilai_ujian', compact('nilai_ujian', 'siswa','nilai_lpk'),$data);
     }
 
-
-
-    public function exportToExcel()
+    public function exportPdf()
     {
-        $nilaiUjian = Nilai_ujian::with('siswa.user')->get();
-
-        return Excel::download(new NilaiUjianExport($nilaiUjian), 'nilai_ujian.xlsx');
+        $nilai_ujian = DB::table('nilai_ujian')
+                            ->join('siswa', 'nilai_ujian.id_siswa', '=', 'siswa.id_siswa')
+                            ->join('users', 'siswa.id_user', '=', 'users.id')
+                            ->select('nilai_ujian.id','users.full_name', 'siswa.nis', 'nilai_ujian.nil_ujian')
+                            ->get();
+        return view('admin.cetak_pdf', compact('nilai_ujian'));
+    }
+    public function exportPdfLpk()
+    {
+        $nilai_lpk = DB::table('nilai_lpk')
+        ->join('siswa', 'nilai_lpk.id_siswa', '=', 'siswa.id_siswa')
+        ->join('users', 'siswa.id_user', '=', 'users.id')
+        ->join('materi', 'nilai_lpk.id_materi', '=', 'materi.id')
+        ->select('nilai_lpk.id','users.full_name', 'siswa.nis', 'nilai_lpk.nilai', 'materi.nama_materi')
+        ->get();
+        return view('admin.cetak_nil_lpk', compact('nilai_lpk'));
     }
 
     public function add_nilai_ujian(Request $request)
