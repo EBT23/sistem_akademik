@@ -62,7 +62,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div>
-                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" type="submit">Cetak Nilai
+                    <a href="{{ route('export.nilai-ujian') }}" class="btn btn-primary mx-3" target="_blank" type="submit">Cetak Nilai
                         Ujian</a>
                 </div>
                 <div class="table-responsive p-0">
@@ -220,7 +220,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div>
-                    <a href="{{ route('export.nilai-lpk') }}" class="btn btn-primary mx-3" type="submit">Cetak Nilai
+                    <a href="{{ route('export.nilai-lpk') }}" class="btn btn-primary mx-3" target="_blank" type="submit">Cetak Nilai
                         LPK</a>
                 </div>
                 <div class="table-responsive p-0">
